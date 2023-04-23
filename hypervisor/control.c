@@ -632,7 +632,8 @@ static int cell_start(struct per_cpu *cpu_data, unsigned long id)
 	if (cell->loadable) {
 		/* unmap all loadable memory regions from the root cell */
 		for_each_mem_region(mem, cell->config, n)
-			if (mem->flags & JAILHOUSE_MEM_LOADABLE) {
+			if ((mem->flags & JAILHOUSE_MEM_LOADABLE) &&
+			    !(mem->flags & JAILHOUSE_MEM_ROOTSHARED)) {
 				err = unmap_from_root_cell(mem);
 				if (err)
 					goto out_resume;
