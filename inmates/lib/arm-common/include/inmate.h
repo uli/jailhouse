@@ -101,6 +101,7 @@ u64 timer_ticks_to_ns(u64 ticks);
 void timer_start(u64 timeout);
 
 void arch_mmu_enable(void);
+void arch_mmu_enable_secondary(void);
 
 #include <asm/processor.h>
 #include <arch/inmate.h>
