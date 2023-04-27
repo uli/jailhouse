@@ -11,19 +11,21 @@ static void handle_IRQ(unsigned int irqn)
 
 void inmate_main(void)
 {
-	map_range((void*)0x48000000, 0x07600000, MAP_CACHED);
-	map_range((void*)0x49000000, 0x01000000, MAP_UNCACHED);
+	map_range((void*)0x49000000, 0x77000000, MAP_CACHED);
+	map_range((void*)0x4a000000, 0x01000000, MAP_UNCACHED);
+	map_range((void*)0x488f1000, 0x9000, MAP_CACHED);
 
 	map_range((void *)0x01000000, 0x00c80000, MAP_UNCACHED);
 	map_range((void *)0x01900000, 0x02000000-0x01900000, MAP_UNCACHED);
 
 	irq_init(handle_IRQ);
 
-        asm("mov.w r0, #0x48000000 ; blx r0");
+        asm("mov.w r0, #0x49000000 ; blx r0");
 	halt();
 }
 
 void vector_unused(void);
+void arch_mmu_enable_secondary(void);
 
 void __attribute__((naked)) vector_unused(void)
 {
@@ -31,6 +33,6 @@ void __attribute__((naked)) vector_unused(void)
 
 	arch_mmu_enable_secondary();
 
-        asm("mov.w r0, #0x48000000 ; blx r0");
+        asm("mov.w r0, #0x49000000 ; blx r0");
 	halt();
 }
