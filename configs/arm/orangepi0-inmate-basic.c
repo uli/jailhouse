@@ -10,7 +10,7 @@ struct {
 	__u64 cpus[1];
 	struct jailhouse_memory mem_regions[10];
 	struct jailhouse_irqchip irqchips[1];
-	struct jailhouse_pci_device pci_devices[1];
+	struct jailhouse_pci_device pci_devices[0];
 } __attribute__((packed)) config = {
 	.cell = {
 		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
@@ -119,18 +119,6 @@ struct {
 				(1 << (118-96)) | (1 << (119-96)),
 				0,
 			},
-		},
-	},
-
-	.pci_devices = {
-		{
-			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
-			.bdf = 0 << 3,
-			.bar_mask = JAILHOUSE_IVSHMEM_BAR_MASK_INTX,
-			.shmem_regions_start = 0,
-			.shmem_dev_id = 1,
-			.shmem_peers = 3,
-			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_UNDEFINED,
 		},
 	},
 };
