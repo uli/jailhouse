@@ -13,7 +13,9 @@ void inmate_main(void)
 {
 	map_range((void*)0x49000000, 0x77000000, MAP_CACHED);
 	map_range((void*)0x4a000000, 0x01000000, MAP_UNCACHED);
-	map_range((void*)0x488f1000, 0x9000, MAP_CACHED);
+	map_range((void*)0x488f0000, 0x10000, MAP_CACHED);
+	memset((void *)0x488f1000, 0, 0x9000);
+	memset((void *)0x488fc000, 0, 0x4000);
 
 	map_range((void *)0x01000000, 0x00c80000, MAP_UNCACHED);
 	map_range((void *)0x01900000, 0x02000000-0x01900000, MAP_UNCACHED);
