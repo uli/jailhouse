@@ -22,7 +22,7 @@ void inmate_main(void)
 
 	irq_init(handle_IRQ);
 
-        asm("mov.w r0, #0x49000000 ; blx r0");
+        asm("mov r0, #0x49000000 ; blx r0");
 	halt();
 }
 
@@ -35,6 +35,6 @@ void __attribute__((naked)) vector_unused(void)
 
 	arch_mmu_enable_secondary();
 
-        asm("mov.w r0, #0x49000000 ; blx r0");
+        asm("mov r0, #0x49000000 ; blx r0");
 	halt();
 }
