@@ -928,6 +928,12 @@ static int cpu_get_info(struct per_cpu *cpu_data, unsigned long cpu_id,
 		return -EINVAL;
 }
 
+static int cell_debug_injectirq(struct per_cpu *cpu_data, unsigned long irq)
+{
+	irqchip_trigger_external_irq(irq);
+	return 0;
+}
+
 /**
  * Handle hypercall invoked by a cell.
  * @param code		Hypercall code.
@@ -967,6 +973,8 @@ long hypercall(unsigned long code, unsigned long arg1, unsigned long arg2)
 			return trace_error(-EPERM);
 		printk("%c", (char)arg1);
 		return 0;
+	case JAILHOUSE_HC_DEBUG_INJECTIRQ:
+		return cell_debug_injectirq(cpu_data, arg1);
 	default:
 		return -ENOSYS;
 	}
