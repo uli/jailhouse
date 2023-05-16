@@ -777,6 +777,9 @@ static long jailhouse_ioctl(struct file *file, unsigned int ioctl,
 	case JAILHOUSE_CELL_DESTROY:
 		err = jailhouse_cmd_cell_destroy((const char __user *)arg);
 		break;
+	case JAILHOUSE_DEBUG_INJECTIRQ:
+		err = jailhouse_cmd_debug_injectirq((u32)arg);
+		break;
 	default:
 		err = -EINVAL;
 		break;

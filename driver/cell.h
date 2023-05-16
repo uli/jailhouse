@@ -53,4 +53,6 @@ int jailhouse_cmd_cell_destroy(const char __user *arg);
 
 int jailhouse_cmd_cell_destroy_non_root(void);
 
+int jailhouse_cmd_debug_injectirq(u32 irq);
+
 #endif /* !_JAILHOUSE_DRIVER_CELL_H */

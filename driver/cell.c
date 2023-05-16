@@ -488,3 +488,8 @@ int jailhouse_cmd_cell_destroy_non_root(void)
 
 	return 0;
 }
+
+int jailhouse_cmd_debug_injectirq(u32 arg)
+{
+	return jailhouse_call_arg1(JAILHOUSE_HC_DEBUG_INJECTIRQ, arg);
+}

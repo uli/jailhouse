@@ -78,5 +78,6 @@ struct jailhouse_cell_load {
 #define JAILHOUSE_CELL_LOAD		_IOW(0, 3, struct jailhouse_cell_load)
 #define JAILHOUSE_CELL_START		_IOW(0, 4, struct jailhouse_cell_id)
 #define JAILHOUSE_CELL_DESTROY		_IOW(0, 5, struct jailhouse_cell_id)
+#define JAILHOUSE_DEBUG_INJECTIRQ	_IOW(0, 6, __u32)
 
 #endif /* !_JAILHOUSE_DRIVER_H */
