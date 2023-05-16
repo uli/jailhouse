@@ -46,6 +46,7 @@ struct {
 			.size = 0x1000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
+		/* input server communication area */
 		{
 			.phys_start = 0x488f1000,
 			.virt_start = 0x488f1000,
@@ -59,6 +60,7 @@ struct {
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
+		/* libc server communication area */
 		{
 			.phys_start = 0x488fc000,
 			.virt_start = 0x488fc000,
