@@ -53,8 +53,9 @@ void vector_irq(void)
 	// GDB stub hack; call stub's IRQ handler through vector at 0xfff8
 	// with as little interference as possible for IRQ 125.
 	if (mmio_read32(gicd_v2_base + GICD_ISPENDR + (125/32)*4) & (1 << (125%32))) {
-		// must clean up registers pushed on the stack by the GCC IRQ handler prolog
-		asm("pop {r0-r7,ip,lr}; mov r0, #0xfff8 ; ldr r0, [r0] ; bx r0");
+		// registers pushed on the stack by the GCC IRQ handler
+		// prolog are cleaned up by the GDB stub handler
+		asm("mov r0, #0xfff8 ; ldr r0, [r0] ; bx r0");
 	}
 
 	while (1) {
