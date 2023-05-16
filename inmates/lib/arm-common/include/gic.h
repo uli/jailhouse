@@ -42,6 +42,7 @@
 #include <inmate.h>
 
 #define GICD_ISENABLER	0x0100
+#define GICD_ISPENDR	0x0200
 
 #define TIMER_IRQ	27
 

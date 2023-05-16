@@ -50,7 +50,7 @@
 #define GICC_PMR_DEFAULT	0xf0
 
 static void *gicc_v2_base;
-static void *gicd_v2_base;
+/*static*/ void *gicd_v2_base;
 
 static void gic_v2_enable(unsigned int irqn)
 {
