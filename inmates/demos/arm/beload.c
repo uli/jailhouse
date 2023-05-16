@@ -27,6 +27,8 @@ void inmate_main(void)
 }
 
 void vector_unused(void);
+void vector_svc(void);
+
 void arch_mmu_enable_secondary(void);
 
 void __attribute__((naked)) vector_unused(void)
@@ -37,4 +39,9 @@ void __attribute__((naked)) vector_unused(void)
 
         asm("mov r0, #0x49000000 ; blx r0");
 	halt();
+}
+
+void __attribute__((naked)) vector_svc(void)
+{
+	asm("push {r0-r7,ip,lr}; mov r0, #0xfff4 ; ldr r0, [r0] ; bx r0");
 }
