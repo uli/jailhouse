@@ -43,5 +43,14 @@ void __attribute__((naked)) vector_unused(void)
 
 void __attribute__((naked)) vector_svc(void)
 {
+	// Save regs, then jump to user SVC handler.
 	asm("push {r0-r7,ip,lr}; mov r0, #0xfff4 ; ldr r0, [r0] ; bx r0");
+}
+
+void vector_dabt(void);
+void __attribute__ ((naked)) vector_dabt(void)
+{
+	// Switch to system mode, re-enable interrupts, then jump to user
+	// data abort handler.
+	asm("cps #0x1f ; mov r0, #0xfff0 ; ldr r0, [r0] ; cpsie if ; bx r0");
 }
