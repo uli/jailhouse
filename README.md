@@ -1,5 +1,15 @@
-JAILHOUSE
-=========
+JAILHOUSE for Engine BASIC
+==========================
+
+This is a heavily modified version of Jailhouse that serves to run the
+Engine BASIC development platform alongside a Linux kernel that provides it
+with input event and system call support.
+
+It removes many security features in Jailhouse and should not be used for
+any applications that require any sort of security.
+
+
+Original README.md:
 
 Introduction
 ------------
