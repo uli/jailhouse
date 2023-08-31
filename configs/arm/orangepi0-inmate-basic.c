@@ -54,7 +54,7 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
-		/* GDB stub port */
+		/* GDB stub and H.264 encoder ports */
 		{
 			.phys_start = 0x488fa000,
 			.virt_start = 0x488fa000,
@@ -114,7 +114,7 @@ struct {
 			.pin_bitmap = {
 				(1 << (47-32)),
 				(1 << (77-64))  | (1 << (82-64)),
-				(1 << (118-96)) | (1 << (119-96)) | (1 << (125-96)),
+				(1 << (118-96)) | (1 << (119-96)) | (1 << (125-96)) | (1 << (127-96)),
 				0,
 			},
 		},
