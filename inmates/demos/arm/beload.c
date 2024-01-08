@@ -21,8 +21,16 @@ void inmate_main(void)
 	memset((void *)SDL_EVENT_BUFFER_ADDR, 0, 0x9000);
 	memset((void *)LIBC_CALL_BUFFER_ADDR, 0, 0x4000);
 
+	// Map I/O regions
+	// XXX: needs to have an option to choose which one should be mapped
+
+	// ... for H3:
 	map_range((void *)0x01000000, 0x00c80000, MAP_UNCACHED);
 	map_range((void *)0x01900000, 0x02000000-0x01900000, MAP_UNCACHED);
+
+	// ... for H616:
+	map_range((void *)0x03000000, 0x03020000-0x03000000, MAP_UNCACHED);
+	map_range((void *)0x03030000, 0x08000000-0x03030000, MAP_UNCACHED);
 
 	irq_init(handle_IRQ);
 
