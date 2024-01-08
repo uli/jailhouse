@@ -161,9 +161,26 @@ static void fill_trap_context(struct trap_context *ctx, union registers *regs)
 	ctx->regs = regs->usr;
 }
 
+static enum trap_return arch_handle_smc(struct trap_context *ctx)
+{
+	unsigned long *regs = ctx->regs;
+
+	if (SMCCC_IS_CONV_64(regs[0]))
+		return TRAP_FORBIDDEN;
+
+	if (IS_PSCI_UBOOT(regs[0])) {
+		regs[0] = psci_dispatch(ctx);
+		arch_skip_instruction(ctx);
+		return TRAP_HANDLED;
+	}
+
+	return handle_smc(ctx);
+}
+
 static const trap_handler trap_handlers[0x40] =
 {
 	[ESR_EC_HVC64]		= handle_hvc,
+	[ESR_EC_SMC32]		= arch_handle_smc,
 	[ESR_EC_SMC64]		= handle_smc,
 	[ESR_EC_SYS64]		= handle_sysreg,
 	[ESR_EC_IABT_LOW]	= handle_iabt,
