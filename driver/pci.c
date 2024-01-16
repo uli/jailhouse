@@ -335,7 +335,11 @@ static bool create_vpci_of_overlay(struct jailhouse_system *config)
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4,17,0)
 	if (of_overlay_fdt_apply(__dtb_vpci_template_begin,
 			__dtb_vpci_template_end - __dtb_vpci_template_begin,
-			&overlay_id) < 0)
+			&overlay_id
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,6,0)	// XXX: don't know exactly
+			, NULL
+#endif
+			) < 0)
 		return false;
 
 #else /* < 4.17 */
